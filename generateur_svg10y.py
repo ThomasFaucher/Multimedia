@@ -58,7 +58,7 @@ aux = 100
 points = [(-100, -70), (-100, 0), (-50, 0), (0, -30), (50, 0), (100, 0), (100, -70), (0, 50)]
 triangles = [0, 1, 2,2,3,4,4,5,6,1,5,7]
 
-dessin = svgwrite.Drawing("question12.svg", size=(800, 600))
+dessin = svgwrite.Drawing("question13.svg", size=(800, 600))
 
 points2 = [
     translater(prodMatVect(Matdilatation(1.2), sommet), (100, 100)) for sommet in points
@@ -84,8 +84,9 @@ def compose(points, triangles):
                 stroke="black",
             )
         )
-
-
-point2_chat = [translater(prodMatVect(Matrotation(20), sommet), (200, 100)) for sommet in points]
-compose(point2_chat, triangles)
+        
+for i in range(1,6):
+    MatFinal = prodMatMat(Matrotation((pi/12)*i), Matdilatation(1/i))
+    point2_chat = [translater(prodMatVect(MatFinal, sommet), (100*i,0)) for sommet in points]
+    compose(point2_chat, triangles)
 dessin.save()
